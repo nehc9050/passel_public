@@ -1,7 +1,7 @@
 from random import randrange
 
 # TODO if using Github diff deployment on HeroKu uncomment the next line
-#import os
+import os
 import discord
 from discord.ext import commands
 
@@ -12,7 +12,7 @@ from discord.ext import commands
 #        Follow the instructions here on how to set up with heroku:
 #
 #        Passel Bot is a solution to the number of limited number of pins in a discord server.
-#        It manages pins in 2 modes, Mode 1 and Mode 2. 
+#        It manages pins in 2 modes, Mode 1 and Mode 2.
 #
 #        More information can be found on https://passelbot.wixsite.com/home
 #        Passel Support Server: https://discord.gg/wmSsKCX
@@ -36,14 +36,14 @@ client.remove_command("help")
 # TODO change mode to 1 or 2 here
 mode = 1
 
-# TODO 
+# TODO
 # sendall is set to 0 by default, change to 1 if you want
 # the bot to send all pinned messages to the pins channel
-sendall = 0
+sendall = 1
 
-# TODO 
+# TODO
 # replace the 0 with the pins channel ID for your sever
-pins_channel = 0
+pins_channel = 1008952684092596286
 
 # TODO
 # add any black listed channel IDs as a list separated by a comma (,)
@@ -146,7 +146,7 @@ async def on_guild_channel_pins_update(channel, last_pin):
                 text="sent in: " + last_pinned.channel.name + " - at: " + str(last_pinned.created_at))
             pinEmbed.set_author(name='Sent by ' + last_pinned.author.name)
             await channel.guild.get_channel(int(pins_channel)).send(embed=pinEmbed)
-            
+
             # remove this message if you do not want the bot to send a message when you pin a message
             await last_pinned.channel.send(
                 "See pinned message in " + channel.guild.get_channel(int(pins_channel)).mention)
@@ -208,8 +208,8 @@ async def on_guild_channel_pins_update(channel, last_pin):
         print("unpinned a message, not useful for bot so does nothing")
 
 
-# TODO Replace TOKEN with the token from discord developer portal 
-client.run('TOKEN')
+# TODO Replace TOKEN with the token from discord developer portal
+# client.run('TOKEN')
 
-# TODO If using GitHub diff deployment on HeroKu comment out the above line with '#' and remove '#' from the line below to uncomment it. 
-#client.run(os.environ.get('TOKEN'))
+# TODO If using GitHub diff deployment on HeroKu comment out the above line with '#' and remove '#' from the line below to uncomment it.
+client.run(os.environ.get('TOKEN'))
